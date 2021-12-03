@@ -15,43 +15,20 @@ public class MyFileReader {
     private static final String FILE_NAME = "input.txt";
     private static final URL FILE_URL = MyFileReader.class.getClassLoader().getResource(FILE_NAME);
 
-    public static List<String> readFile(){
+    public static List<String> readFile() throws URISyntaxException, IOException {
 
-        File file = null;
-        try {
-            file = Paths.get(FILE_URL.toURI()).toFile();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        File file = Paths.get(FILE_URL.toURI()).toFile();;
+        FileInputStream fis = new FileInputStream(file);;
         InputStreamReader isr = new InputStreamReader(fis);
         BufferedReader br = new BufferedReader(isr);
         String line = "";
         List<String> textListFromFile = new ArrayList<>();
 
-        while(true){
-            try {
-                if (((line = br.readLine()) == null)) {
-                    break;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (((line = br.readLine()) != null)) {
             textListFromFile.add(line);
         }
 
-        try {
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        br.close();
 
         return textListFromFile;
     }
