@@ -1,6 +1,7 @@
 package com.ita.u1.task1.servlet;
 
-import com.ita.u1.task1.service.DataService;
+import com.ita.u1.task1.dao.impl.MyFileReader;
+import com.ita.u1.task1.service.impl.SimpleDataService;
 
 import java.io.*;
 import javax.servlet.ServletException;
@@ -15,13 +16,13 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("list", new DataService().getData());
+        req.setAttribute("list", new SimpleDataService(new MyFileReader()).getData());
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("list", new DataService().sortData());
+        req.setAttribute("list", new SimpleDataService(new MyFileReader()).sortData());
         req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 
