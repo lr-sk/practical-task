@@ -28,8 +28,4 @@ public class MainServlet extends HttpServlet {
 
     public void destroy() {
     }
-
-//    private void processRequest(HttpServletRequest req, HttpServletResponse resp){
-//
-//    }
 }
